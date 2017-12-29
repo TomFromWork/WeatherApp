@@ -1,0 +1,55 @@
+html {
+  font-family: sans-serif;
+}
+.wrapper {
+  display: flex;
+  margin: auto;
+  margin-top: 35px;
+  height: 400px;
+  max-width: 1400px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex: 2;
+  padding: 5px;
+}
+
+.wide-column {
+  flex: 3;
+}
+
+.column > div {
+  flex: 1;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #a9a9a9;
+  border-radius: 5px;
+}
+
+h1 {
+  font-size: 2.5em;
+  color: #363636;
+  font-weight: 400;
+  line-height: 1.125;
+  margin: 0 0 10px;
+}
+
+p {
+  color: #4a4a4a;
+  font-size: 1.125em;
+  font-weight: 400;
+  line-height: 1.125;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+img {
+  height: 64px;
+  width: 64px;
+}
+
+figure {
+  margin: 0;
+}
