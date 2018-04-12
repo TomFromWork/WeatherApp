@@ -29,6 +29,11 @@ $(document).ready(function() {
         function(display) {
           console.log(display);
 
+          /* Convert celsius to fehrenheit */
+          var fahrenheit = Math.floor((display.main.temp * 9/5) + 32);
+          /* convert wind kph to mph */
+          var mph = Math.round(10*display.wind.speed/1.609344)/10;
+
           /* Sunrise code */
           var sunrise = new Date(display.sys.sunrise * 1000);
           var formattedSunrise = sunrise.toLocaleTimeString("en-US", {
@@ -44,20 +49,29 @@ $(document).ready(function() {
           });
 
           /* First Box */
+          $("#description").html(display.weather[0].description);
+          $("#location").html(display.name + ", " + display.sys.country);
+          
+          /* Second Box */
           $("#temp").html(Math.floor(display.main.temp) + "&deg;C");
           $("#weatherIcon").attr("src", display.weather[0].icon);
-          $("#description").html(display.weather[0].description);
-
-          /* Second Box */
-          $("#location").html(display.name + ", " + display.sys.country);
-          $("#time").html(currentTime);
-          $("#date").html(currentDay);
 
           /* Third Box */
-          $("#highLowTemps").html("High: " + display.main.temp_max + " Low: " + display.main.temp_min);
+          $("#pressure").html("Pressure: " + display.main.pressure);
           $("#sunrise").html("Sunrise: " + formattedSunrise);
           $("#sunset").html("Sunset: " + formattedSunset);
-          $("#wind").html("Wind: " + degToCompass(display.wind.deg) + " " + display.wind.speed);
+          $("#wind").html("Wind: " + degToCompass(display.wind.deg) + " " + display.wind.speed + " KPH");
+
+          /* Toggleswitch for temp conversion */
+          $("input").change(function() {
+            if($("#conversion").prop("checked")) {
+              $("#temp").html(fahrenheit + "&deg;F");
+              $("#wind").html("Wind: " + degToCompass(display.wind.deg) + " " + mph + " MPH");
+            } else {
+              $("#temp").html(Math.floor(display.main.temp) + "&deg;C");
+              $("#wind").html("Wind: " + degToCompass(display.wind.deg) + " " + display.wind.speed + " KPH");
+            }
+          })
         });
     })
   }
